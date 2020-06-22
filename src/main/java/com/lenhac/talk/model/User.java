@@ -1,7 +1,7 @@
 package com.lenhac.talk.model;
 
 
-import com.lenhac.talk.validator.ValidPassword;
+//import com.lenhac.talk.validator.ValidPassword;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -35,7 +35,7 @@ public class User {
     @NotNull
     @Email(message = "Please enter a valid e-mail address")
     private String email;
-    @ValidPassword
+//    @ValidPassword
     private String password;
     @Transient
     private String confirmPassword;
