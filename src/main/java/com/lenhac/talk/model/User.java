@@ -2,6 +2,7 @@ package com.lenhac.talk.model;
 
 
 //import com.lenhac.talk.validator.ValidPassword;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.Set;
 
 import static javax.persistence.TemporalType.DATE;
 
@@ -40,6 +42,16 @@ public class User {
     @Transient
     private String confirmPassword;
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    @ManyToMany
+    private Set<Role> roles;
 
 
 

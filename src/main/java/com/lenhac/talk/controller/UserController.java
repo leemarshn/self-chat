@@ -3,13 +3,10 @@ package com.lenhac.talk.controller;
 
 import com.lenhac.talk.model.User;
 import com.lenhac.talk.repositories.UserRepository;
-import com.lenhac.talk.service.UserService;
+import com.lenhac.talk.repositories.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,12 +17,12 @@ import javax.validation.Valid;
 public class UserController {
 
 
-//     private final UserRepository userRepository;
+    private final UserRepository userRepository;
 
-//    @Autowired
-//    public UserController(UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
+    @Autowired
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Autowired
     private UserService userService;
@@ -40,7 +37,7 @@ public class UserController {
     }
 
 
-        @RequestMapping(value = "/adduser", method = RequestMethod.POST)
+    @RequestMapping(value = "/adduser", method = RequestMethod.POST)
     public ModelAndView createNewBill(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
 //        Bill billExists = //userService.findUserByEmail(user.getEmail());
@@ -53,7 +50,7 @@ public class UserController {
             modelAndView.setViewName("add-user");
         } else {
             //userService.saveUser(user);
-            userService.addUser(user);
+            userService.save(user);
             modelAndView.addObject("successMessage", "user has been added successfully");
             modelAndView.addObject("user", new User());
             modelAndView.setViewName("add-user");
@@ -62,5 +59,57 @@ public class UserController {
 
         return modelAndView;
     }
-
 }
+
+
+//
+//    @Autowired
+//    private UserService userService;
+//
+//    @Autowired
+//    private SecurityService securityService;
+//
+//    @Autowired
+//    private UserValidator userValidator;
+//
+//    @GetMapping("/registration")
+//    public String registration(Model model) {
+//        model.addAttribute("userForm", new User());
+//
+//        return "registration";
+//    }
+//
+//    @PostMapping("/registration")
+//    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
+//        userValidator.validate(userForm, bindingResult);
+//
+//        if (bindingResult.hasErrors()) {
+//            return "registration";
+//        }
+//
+//        userService.save(userForm);
+//
+//        securityService.autoLogin(userForm.getEmail(), userForm.getConfirmPassword());
+//
+//        return "redirect:/welcome";
+//    }
+//
+//    @GetMapping("/login")
+//    public String login(Model model, String error, String logout) {
+//        if (error != null)
+//            model.addAttribute("error", "Your username and password is invalid.");
+//
+//        if (logout != null)
+//            model.addAttribute("message", "You have been logged out successfully.");
+//
+//        return "login";
+//    }
+//
+//    @GetMapping({"/", "/welcome"})
+//    public String welcome(Model model) {
+//        return "welcome";
+//    }
+//
+//
+//
+//}

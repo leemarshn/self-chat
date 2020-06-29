@@ -15,14 +15,14 @@ public class RouteTraffic {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/")
-    public String welcome() {
-        return "index";
-    }
-//
-//    @GetMapping("/user")
+//    @GetMapping("/")
+//    public String welcome() {
+//        return "index";
+//    }
+
+//    @GetMapping("/login")
 //    public String addUser() {
-//        return "addUser";
+//        return "login";
 //    }
 //
 //    @GetMapping("/message")
