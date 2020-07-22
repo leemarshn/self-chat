@@ -59,15 +59,15 @@
                             <label th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}" class="validation-message"></label>
                         </div>
                     </div>
-                    <div>
-                        <label>Access Level:</label>
-                        <select th:field="*{roles}">
-                            <option value=""> -- </option>
-                            <option th:each="role : ${roles}"
-                                    th:value="${role.id}"
-                                    th:utext="${role.name}"/>
-                        </select>
-                    </div>
+<!--                    <div>-->
+<!--                        <label>Access Level:</label>-->
+<!--                        <select th:field="*{roles}">-->
+<!--                            <option value=""> &#45;&#45; </option>-->
+<!--                            <option th:each="role : ${roles}"-->
+<!--                                    th:value="${id}"-->
+<!--                                    th:utext="${name}"/>-->
+<!--                        </select>-->
+<!--                    </div>-->
 
 
                 </div>

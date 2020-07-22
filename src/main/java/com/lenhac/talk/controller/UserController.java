@@ -9,6 +9,7 @@ import com.lenhac.talk.repositories.UserService;
 import com.lenhac.talk.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -111,7 +112,7 @@ public class UserController {
 
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView addUser(@Valid User user, BindingResult bindingResult) {
+    public ModelAndView addUser(@Valid User user, BindingResult bindingResult, Model model) {
         ModelAndView modelAndView = new ModelAndView();
 //        userValidator.validate(user, bindingResult);
 
@@ -144,6 +145,10 @@ public class UserController {
             modelAndView.addObject("successMessage", "user has been added successfully");
 //            modelAndView.addObject("user", new User());
             securityService.autoLogin(user.getEmail(), user.getConfirmPassword());
+//            Role access = new Role();
+//            model.addAttribute("name", access.getName() );
+//            model.addAttribute("id", access.getId());
+            model.addAttribute("users", userRepository.findAll());
 
             modelAndView.setViewName("welcome");
 
