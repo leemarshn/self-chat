@@ -1,6 +1,7 @@
 package com.lenhac.talk.service;
 
 
+import com.lenhac.talk.model.Role;
 import com.lenhac.talk.model.User;
 import com.lenhac.talk.repositories.RoleRepository;
 import com.lenhac.talk.repositories.UserRepository;
@@ -25,6 +26,12 @@ public class UserServiceImpl implements UserService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRoles(new HashSet<>(roleRepository.findAll()));
         userRepository.save(user);
+    }
+
+    @Override
+    public void saveRole(Role role) {
+        roleRepository.save(role);
+
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.lenhac.talk.controller;
 
 
+import com.lenhac.talk.model.Role;
 import com.lenhac.talk.model.User;
 import com.lenhac.talk.repositories.SecurityService;
 import com.lenhac.talk.repositories.UserRepository;
@@ -44,6 +45,35 @@ public class UserController {
         modelAndView.setViewName("add-user");
         return modelAndView;
     }
+
+
+    @RequestMapping(value = "/roles", method = RequestMethod.GET)
+    public ModelAndView rolesConfiguration() {
+        ModelAndView modelAndView = new ModelAndView();
+        Role role = new Role();
+        modelAndView.addObject("role", role);
+        modelAndView.setViewName("add-roles");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/roles", method = RequestMethod.POST)
+    public ModelAndView addRole(@Valid Role role, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("add-roles");
+        } else {
+            userService.saveRole(role);
+            modelAndView.addObject("successMessage", "Role has been added successfully");
+
+            modelAndView.setViewName("welcome");
+
+        }
+
+        return userRegistration();
+    }
+
+
+
 
 
 //    @RequestMapping(value = "/adduser", method = RequestMethod.POST)
@@ -103,6 +133,7 @@ public class UserController {
             bindingResult.rejectValue("confirmPassword", "error.user", "Password do not match");
 //            errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
         }
+
 
 
         if (bindingResult.hasErrors()) {
